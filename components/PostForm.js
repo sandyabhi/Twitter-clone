@@ -1,14 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import useUserInfo from "../hooks/useUserInfo";
+import Avatar from "./Avatar";
 
-export default function PostForm() {
+export default function PostForm({ onPost }) {
   const { userInfo, status } = useUserInfo();
   const [text, setText] = useState();
 
   async function handlePostSubmit(e) {
     e.preventDefault();
     await axios.post("/api/posts", { text });
+    setText("");
+
+    if (onPost) {
+      onPost();
+    }
   }
 
   if (status === "loading") return "";
@@ -17,9 +23,7 @@ export default function PostForm() {
     <form className="mx-5" onSubmit={handlePostSubmit}>
       <div className="flex">
         <div>
-          <div className="rounded-full overflow-hidden w-12">
-            <img src={userInfo?.image} alt="avatar"></img>
-          </div>
+          <Avatar src={userInfo?.image} />
         </div>
         <div className="grow pl-2">
           <textarea
@@ -28,7 +32,7 @@ export default function PostForm() {
             className="w-full p-2 bg-transparent text-twitterWhite"
             placeholder="What's happening?"
           />
-          <div className="text-right border-t border-twitterBorder pt-2">
+          <div className="text-right border-t border-twitterBorder pt-2 pb-2">
             <button className="bg-twitterBlue text-white px-5 py-1 rounded-full">
               Tweet
             </button>
