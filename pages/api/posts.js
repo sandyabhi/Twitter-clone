@@ -2,6 +2,7 @@ import { initMongoose } from "../../lib/mongoose";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
 import Post from "../../models/Post";
+import Like from "../../models/Like";
 
 export default async function handler(req, res) {
   await initMongoose();
@@ -19,7 +20,12 @@ export default async function handler(req, res) {
         .limit(20)
         .exec();
 
-      res.json(posts);
+      const postsLikedByMe = await Like.find({
+        author: session.user.id,
+        post: posts.map((p) => p._id),
+      });
+      const idsLikedByMe = postsLikedByMe.map((like) => like.post);
+      res.json({ posts, idsLikedByMe });
     }
   }
 

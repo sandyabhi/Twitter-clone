@@ -9,15 +9,18 @@ import useUserInfo from "../hooks/useUserInfo";
 export default function Home() {
   const { userInfo, status: userInfoStatus } = useUserInfo();
   const [posts, setPosts] = useState([]);
+  const [idsLikedByMe, setIdsLikedByMe] = useState([]);
 
   async function fetchHomePosts() {
     await axios.get("api/posts").then((res) => {
-      setPosts(res.data);
+      setPosts(res.data.posts);
+      setIdsLikedByMe(res.data.idsLikedByMe);
     });
   }
 
   useEffect(() => {
     fetchHomePosts();
+    console.log({ idsLikedByMe });
   }, []);
 
   if (userInfoStatus === "loading") {
@@ -42,7 +45,10 @@ export default function Home() {
         {posts.length > 0 &&
           posts.map((post) => (
             <div className="border-t border-twitterBorder p-5 ">
-              <PostContent {...post} />
+              <PostContent
+                {...post}
+                likedByMe={idsLikedByMe.includes(post._id)}
+              />
             </div>
           ))}
       </div>

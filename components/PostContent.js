@@ -9,6 +9,7 @@ export default function PostContent({
   createdAt,
   _id,
   likesCount,
+  likedByMe,
   big = false,
 }) {
   return (
@@ -36,7 +37,11 @@ export default function PostContent({
           {!big && (
             <div>
               <Link href={`/${author.username}/status/${_id}`}>{text}</Link>
-              <PostButtons id={_id} likesCount={likesCount} />
+              <PostButtons
+                id={_id}
+                likesCount={likesCount}
+                likedByMe={likedByMe}
+              />
             </div>
           )}
         </div>
@@ -57,7 +62,7 @@ export default function PostContent({
                 .join(" ")}
             </div>
           )}
-          <PostButtons id={_id} likesCount={likesCount} />
+          <PostButtons id={_id} likesCount={likesCount} likedByMe={likedByMe} />
         </div>
       )}
     </div>
