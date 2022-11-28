@@ -10,24 +10,28 @@ export default function PostContent({
   _id,
   likesCount,
   likedByMe,
+  commentsCount,
   big = false,
 }) {
   return (
     <div>
       <div className="flex w-full">
         <div>
-          <Avatar
-            src={
-              author.image ||
-              "https://images.unsplash.com/photo-1667835949430-a2516cc93d27?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            }
-          />
+          {!!author.image && (
+            <Link href={`/` + author?.username}>
+              <Avatar src={author.image} />
+            </Link>
+          )}
         </div>
         <div className="pl-2 grow">
           <div>
-            <span className="font-bold pr-1"> {author.name}</span>
+            <Link href={`/` + author?.username}>
+              <span className="font-bold pr-1"> {author.name}</span>
+            </Link>
             {big && <br />}
-            <span className="text-twitterLightGray">@{author.username}</span>
+            <Link href={`/` + author?.username}>
+              <span className="text-twitterLightGray">@{author.username}</span>
+            </Link>
             {createdAt && !big && (
               <span className="pl-1 text-twitterLightGray">
                 <ReactTimeAgo date={createdAt} timeStyle={"twitter"} />
@@ -36,11 +40,14 @@ export default function PostContent({
           </div>
           {!big && (
             <div>
-              <Link href={`/${author.username}/status/${_id}`}>{text}</Link>
+              <Link href={`/${author.username}/status/${_id}`}>
+                <div className="w-full">{text}</div>
+              </Link>
               <PostButtons
                 id={_id}
                 likesCount={likesCount}
                 likedByMe={likedByMe}
+                commentsCount={commentsCount}
               />
             </div>
           )}
@@ -62,7 +69,12 @@ export default function PostContent({
                 .join(" ")}
             </div>
           )}
-          <PostButtons id={_id} likesCount={likesCount} likedByMe={likedByMe} />
+          <PostButtons
+            id={_id}
+            likesCount={likesCount}
+            likedByMe={likedByMe}
+            commentsCount={commentsCount}
+          />
         </div>
       )}
     </div>

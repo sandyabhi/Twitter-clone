@@ -3,13 +3,18 @@ import { useState } from "react";
 import useUserInfo from "../hooks/useUserInfo";
 import Avatar from "./Avatar";
 
-export default function PostForm({ onPost }) {
+export default function PostForm({
+  onPost,
+  compact,
+  parent,
+  placeholder = "What's happening?",
+}) {
   const { userInfo, status } = useUserInfo();
   const [text, setText] = useState();
 
   async function handlePostSubmit(e) {
     e.preventDefault();
-    await axios.post("/api/posts", { text });
+    await axios.post("/api/posts", { text, parent });
     setText("");
 
     if (onPost) {
@@ -30,7 +35,7 @@ export default function PostForm({ onPost }) {
             value={text}
             onChange={(e) => setText(e.target.value)}
             className="w-full p-2 bg-transparent text-twitterWhite"
-            placeholder="What's happening?"
+            placeholder={placeholder}
           />
           <div className="text-right border-t border-twitterBorder pt-2 pb-2">
             <button className="bg-twitterBlue text-white px-5 py-1 rounded-full">

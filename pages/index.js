@@ -1,4 +1,6 @@
 import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import PostContent from "../components/PostContent";
@@ -7,9 +9,12 @@ import UsernameForm from "../components/UsernameForm";
 import useUserInfo from "../hooks/useUserInfo";
 
 export default function Home() {
-  const { userInfo, status: userInfoStatus } = useUserInfo();
+  const { data: session } = useSession();
+  const { userInfo, setUserInfo, status: userInfoStatus } = useUserInfo();
   const [posts, setPosts] = useState([]);
   const [idsLikedByMe, setIdsLikedByMe] = useState([]);
+
+  const router = useRouter();
 
   async function fetchHomePosts() {
     await axios.get("api/posts").then((res) => {
@@ -20,18 +25,27 @@ export default function Home() {
 
   useEffect(() => {
     fetchHomePosts();
-    console.log({ idsLikedByMe });
+    // console.log({ idsLikedByMe });
   }, []);
 
   if (userInfoStatus === "loading") {
     return "loading user info";
   }
 
-  if (!userInfo?.username) {
+  if (userInfo && !userInfo?.username) {
     return <UsernameForm />;
   }
 
-  console.log(userInfo?.image);
+  if (!userInfo) {
+    router.push("/login");
+    return "no user info";
+  }
+
+  async function logout() {
+    setUserInfo(null);
+    await signOut();
+  }
+
   return (
     <Layout>
       <h1 className="text-lg font-bold p-4">Home</h1>
@@ -41,7 +55,7 @@ export default function Home() {
         }}
       />
 
-      <div className="">
+      <div>
         {posts.length > 0 &&
           posts.map((post) => (
             <div className="border-t border-twitterBorder p-5 ">
@@ -52,6 +66,16 @@ export default function Home() {
             </div>
           ))}
       </div>
+      {userInfo && (
+        <div className="p-5 text-center border-t border-twitterBorder">
+          <button
+            onClick={logout}
+            className="bg-twitterWhite text-black px-5 py-2 rounded-full"
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </Layout>
   );
 }
