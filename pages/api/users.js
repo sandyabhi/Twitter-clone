@@ -14,8 +14,10 @@ export default async function handle(req, res) {
   }
 
   if (req.method === "GET") {
-    const id = req.query.id;
-    const user = await User.findById(id);
+    const { id, username } = req.query;
+    const user = id
+      ? await User.findById(id)
+      : await User.findOne({ username });
     res.json({ user });
   }
 }

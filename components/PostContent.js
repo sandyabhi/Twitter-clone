@@ -45,6 +45,7 @@ export default function PostContent({
               </Link>
               <PostButtons
                 id={_id}
+                username={author.username}
                 likesCount={likesCount}
                 likedByMe={likedByMe}
                 commentsCount={commentsCount}
@@ -71,6 +72,7 @@ export default function PostContent({
           )}
           <PostButtons
             id={_id}
+            username={author.username}
             likesCount={likesCount}
             likedByMe={likedByMe}
             commentsCount={commentsCount}
