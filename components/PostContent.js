@@ -11,26 +11,42 @@ export default function PostContent({
   likesCount,
   likedByMe,
   commentsCount,
+  images,
   big = false,
 }) {
+  function showImages() {
+    if (!images?.length) return "";
+
+    return (
+      <div className="flex -mx-1">
+        {images.length > 0 &&
+          images.map((img) => (
+            <div className="m-1" key={img}>
+              <img src={img} alt="" className="max-h-72" />
+            </div>
+          ))}
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex w-full">
         <div>
-          {!!author.image && (
+          {!!author?.image && (
             <Link href={`/` + author?.username}>
-              <Avatar src={author.image} />
+              <Avatar src={author?.image} />
             </Link>
           )}
         </div>
         <div className="pl-2 grow">
           <div>
             <Link href={`/` + author?.username}>
-              <span className="font-bold pr-1"> {author.name}</span>
+              <span className="font-bold pr-1"> {author?.name}</span>
             </Link>
             {big && <br />}
             <Link href={`/` + author?.username}>
-              <span className="text-twitterLightGray">@{author.username}</span>
+              <span className="text-twitterLightGray">@{author?.username}</span>
             </Link>
             {createdAt && !big && (
               <span className="pl-1 text-twitterLightGray">
@@ -40,12 +56,15 @@ export default function PostContent({
           </div>
           {!big && (
             <div>
-              <Link href={`/${author.username}/status/${_id}`}>
-                <div className="w-full">{text}</div>
+              <Link href={`/${author?.username}/status/${_id}`}>
+                <div className="w-full">
+                  {text}
+                  {showImages()}
+                </div>
               </Link>
               <PostButtons
                 id={_id}
-                username={author.username}
+                username={author?.username}
                 likesCount={likesCount}
                 likedByMe={likedByMe}
                 commentsCount={commentsCount}
@@ -57,7 +76,12 @@ export default function PostContent({
 
       {big && (
         <div className="mt-2">
-          <Link href={`/${author.username}/status/${_id}`}>{text}</Link>
+          <Link href={`/${author.username}/status/${_id}`}>
+            <div>
+              {text}
+              {showImages()}
+            </div>
+          </Link>
 
           {createdAt && (
             <div className="text-twitterLightGray text-sm">

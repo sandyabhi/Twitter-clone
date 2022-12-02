@@ -1,3 +1,12 @@
+## Social Media App Like Twitter or Linkedin
+
+## TODO
+
+- Fix upload image(cover)
+- Add update image to profile
+- Add Trending/News/Weather to fill Side White Space
+- Search Functionality to Search Users
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

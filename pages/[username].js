@@ -27,6 +27,7 @@ export default function UserPage() {
     axios.get("/api/users?username=" + username).then((response) => {
       setProfileInfo(response.data.user);
       setOriginalUserInfo(response.data.user);
+      setIsFollowing(response.data.follow);
     });
   }, [username]);
 
@@ -39,8 +40,6 @@ export default function UserPage() {
       setPostsLikedByMe(response.data.idsLikedByMe);
     });
   }, [profileInfo]);
-
-  const isMyProfile = profileInfo?._id === userInfo?._id;
 
   async function updateProfile() {
     const { bio, name, username } = profileInfo;
@@ -67,6 +66,13 @@ export default function UserPage() {
     });
   }
 
+  function updateUserImage(type, src) {
+    console.log(type, src);
+    setProfileInfo((prev) => ({ ...prev, [type]: src }));
+  }
+
+  const isMyProfile = profileInfo?._id === userInfo?._id;
+
   return (
     <Layout>
       {!!profileInfo && (
@@ -74,7 +80,11 @@ export default function UserPage() {
           <div className="px-5 pt-2">
             <TopNavLink title={profileInfo.name} />
           </div>
-          <Cover src={profileInfo.cover} />
+          <Cover
+            src={profileInfo.cover}
+            editable={isMyProfile}
+            onChange={(src) => updateUserImage("cover", src)}
+          />
           <div className="flex justify-between">
             <div className="ml-5 relative">
               <div className="absolute -top-12 border-4 rounded-full border-black">

@@ -3,25 +3,26 @@ import { useState } from "react";
 import { FileDrop } from "react-file-drop";
 import { PulseLoader } from "react-spinners";
 
-export default function Cover({ src, editable, onChange }) {
+export default function Upload({ children, onUploadFinish }) {
   const [isFileNearby, setIsFileNearby] = useState(false);
   const [isFileOver, setIsFileOver] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [image, setImage] = useState("");
 
-  function updateImage(files, e) {
-    if (!editable) {
-      return;
-    }
+  function uploadImage(files, e) {
+    //   // if (!editable) {
+    //   //   return;
+    //   // }
     e.preventDefault();
 
     setIsFileNearby(false);
     setIsFileOver(false);
     setIsUploading(true);
 
+    // console.log("------------------");
     postDetails(files[0]);
 
-    handlePostSubmit(e);
+    // handlePostSubmit(e);
   }
 
   const postDetails = (pics) => {
@@ -38,9 +39,11 @@ export default function Cover({ src, editable, onChange }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          // console.log("url", data.url.toString());
-          // return data.url.toString()
+          console.log("url", data.url.toString());
           setImage(data.url.toString());
+          // console.log(image);
+          onUploadFinish(image);
+          setIsUploading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -48,44 +51,40 @@ export default function Cover({ src, editable, onChange }) {
     }
   };
 
-  async function handlePostSubmit(e) {
-    e.preventDefault();
-    // console.log(image);
-    await axios.post("/api/upload", { image: image });
-    console.log(image);
-    // onChange(cover); 03.55
-    onChange(image);
+  //   async function handlePostSubmit(e) {
+  //     e.preventDefault();
+  //     console.log(image);
+  //     await axios.post("/api/upload", { image: image });
+  //     // console.log(cover);
+  //     // onChange(cover); 03.55 4.29
 
-    setIsUploading(false);
-  }
+  //     setIsUploading(false);
+  //   }
 
   let extraClasses = "";
   if (isFileNearby && !isFileOver) extraClasses += " bg-blue-500 opacity-30";
   if (isFileOver) extraClasses += " bg-blue-500 opacity-80";
-  if (!editable) extraClasses = "";
+  // if (!editable) extraClasses = "";
 
   return (
     <FileDrop
-      onDrop={updateImage}
+      onDrop={uploadImage}
       onDragOver={() => setIsFileOver(true)}
       onDragLeave={() => setIsFileOver(false)}
       onFrameDragEnter={() => setIsFileNearby(true)}
       onFrameDragLeave={() => setIsFileNearby(false)}
+      onFrameDrop={() => {
+        setIsFileNearby(false);
+        setIsFileOver(false);
+      }}
     >
-      <div className={"bg-twitterBorder text-white relative"}>
-        <div className={"absolute inset-0" + extraClasses}></div>
-        {isUploading && (
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ backgroundColor: "rgba(48,140,216,0.9)" }}
-          >
-            <PulseLoader size={14} color={"#fff"} />
+      <div className="relative">
+        {(isFileNearby || isFileOver) && (
+          <div className="bg-twitterBlue absolute inset-8 flex items-center justify-center ">
+            drop your image here
           </div>
         )}
-
-        <div className={"flex items-center overflow-hidden h-36"}>
-          {src && <img src={src} className="w-full" alt="" />}
-        </div>
+        {children({ isUploading })}
       </div>
     </FileDrop>
   );
