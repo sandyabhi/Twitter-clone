@@ -1,58 +1,67 @@
 ## Social Media App Like Twitter or Linkedin
 
-## What I built
-Social Media Web Application 
+### [--LIVE--](https://birdie-kappa.vercel.app) 
 
 ### Demo
-* On first time opening if this website/or after logging out, user will be redirected to **Login Page** and will ask to login using google account
-![Imgur](https://imgur.com/2B1oCUd)
 
-* User can see all the posts and replies
-![Imgur](https://imgur.com/BZiYQeO)
+* On first time opening this website/or after logging out, user will be redirected to **Login Page** and will ask to login using google account
+
+![Imgur](https://imgur.com/2B1oCUd.jpg)
+
+
+* User can see all the posts and replies on the Home Page
+
+![Imgur](https://imgur.com/BZiYQeO.jpg)
+
 
 * User can post **Text and Images**(Drag and Drop).
-![Imgur](https://imgur.com/kfBozc2)
+
+![Imgur](https://imgur.com/kfBozc2.jpg)
+
 
 * User can change their cover image by dragging the image from local drive dropping to the the cover area.
-![Before](https://imgur.com/BvbGci4)
-![After](https://imgur.com/mokY2tc)
+
+![Before](https://imgur.com/BvbGci4.jpg)
+![After](https://imgur.com/mokY2tc.jpg)
+
 
 * User can **Reply** on the post as well as **Reply** on the **Replies**
-![Imgur](https://imgur.com/eX7fMfj)
-![Imgur](https://imgur.com/QarXGi5)
+
+![Imgur](https://imgur.com/eX7fMfj.jpg)
+![Imgur](https://imgur.com/QarXGi5.jpg)
+
 
 * User can **Like** the **Posts** and **Replies**
-![Imgur](https://imgur.com/6iHZQ0X)
+
+![Imgur](https://imgur.com/eTb7rC7.jpg)
+
 
 * User can edit thier **Bio**, **Username**, and **Display Name** on their User Page.
-![Edit](https://imgur.com/6iHZQ0X)
+
+![Edit](https://imgur.com/6iHZQ0X.jpg)
+
 
 * User can see their user posts and replies on the user page(user can access their page by clicking on thier name or image).
-![Imgur](https://imgur.com/l5bhrix)
+
+![Imgur](https://imgur.com/QQ0FzYJ.jpg)
+
 
 * User can Logout using Logout button under the posts of the Home Page.
-![Logout](https://imgur.com/QoPBvMq)
 
+![Logout](https://imgur.com/QoPBvMq.jpg)
 
-
-### Description
- 
-
-### Link to Source Code
-
-
-### Permissive License
-
-
-## Background
-(What made you decide to build this particular app? What inspired you?)
-
-
-### How I built it
-(How did you utilize MongoDB Atlas? Did you learn something new along the way? Pick up a new skill?)
-
-
-### Additional Resources/Info
+### Tech Stack
+* Nextjs: Used for the frontend as well as for the backend.
+* MonogDB ATLAS: Cloud DataBase
+* Next-Auth: To Google Authentication
+* TailWind CSS: CSS framework.
+* @next-auth/mongodb-adapter
+* Mongoose
+* Axios
+* React-File-Drop
+* react-flip-numbers
+* javascript-time-ago
+* React-Spinner
 
 ## TODO
 
@@ -60,6 +69,7 @@ Social Media Web Application
 - Add update image to profile
 - Add Trending/News/Weather to fill Side White Space
 - Search Functionality to Search Users
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -75,23 +85,3 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
