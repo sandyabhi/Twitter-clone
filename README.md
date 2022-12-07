@@ -36,12 +36,12 @@
 ![Imgur](https://imgur.com/eTb7rC7.jpg)
 
 
-* User can edit thier **Bio**, **Username**, and **Display Name** on their User Page.
+* User can edit their **Bio**, **Username**, and **Display Name** on their User Page.
 
 ![Edit](https://imgur.com/6iHZQ0X.jpg)
 
 
-* User can see their user posts and replies on the user page(user can access their page by clicking on thier name or image).
+* User can see their user posts and replies on the user page(user can access their page by clicking on their name or image).
 
 ![Imgur](https://imgur.com/QQ0FzYJ.jpg)
 
@@ -55,6 +55,7 @@
 * MonogDB ATLAS: Cloud DataBase
 * Next-Auth: To Google Authentication
 * TailWind CSS: CSS framework.
+* Cloudinary to Store Images
 * @next-auth/mongodb-adapter
 * Mongoose
 * Axios
