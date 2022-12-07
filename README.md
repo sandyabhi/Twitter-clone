@@ -1,5 +1,59 @@
 ## Social Media App Like Twitter or Linkedin
 
+## What I built
+Social Media Web Application 
+
+### Demo
+* On first time opening if this website/or after logging out, user will be redirected to **Login Page** and will ask to login using google account
+![Imgur](https://imgur.com/2B1oCUd)
+
+* User can see all the posts and replies
+![Imgur](https://imgur.com/BZiYQeO)
+
+* User can post **Text and Images**(Drag and Drop).
+![Imgur](https://imgur.com/kfBozc2)
+
+* User can change their cover image by dragging the image from local drive dropping to the the cover area.
+![Before](https://imgur.com/BvbGci4)
+![After](https://imgur.com/mokY2tc)
+
+* User can **Reply** on the post as well as **Reply** on the **Replies**
+![Imgur](https://imgur.com/eX7fMfj)
+![Imgur](https://imgur.com/QarXGi5)
+
+* User can **Like** the **Posts** and **Replies**
+![Imgur](https://imgur.com/6iHZQ0X)
+
+* User can edit thier **Bio**, **Username**, and **Display Name** on their User Page.
+![Edit](https://imgur.com/6iHZQ0X)
+
+* User can see their user posts and replies on the user page(user can access their page by clicking on thier name or image).
+![Imgur](https://imgur.com/l5bhrix)
+
+* User can Logout using Logout button under the posts of the Home Page.
+![Logout](https://imgur.com/QoPBvMq)
+
+
+
+### Description
+ 
+
+### Link to Source Code
+
+
+### Permissive License
+
+
+## Background
+(What made you decide to build this particular app? What inspired you?)
+
+
+### How I built it
+(How did you utilize MongoDB Atlas? Did you learn something new along the way? Pick up a new skill?)
+
+
+### Additional Resources/Info
+
 ## TODO
 
 - Fix upload image(cover)
